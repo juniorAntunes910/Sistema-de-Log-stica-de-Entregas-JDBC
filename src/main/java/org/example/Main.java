@@ -2,6 +2,7 @@ package org.example;
 
 import Dao.*;
 import Entidades.Cliente;
+import Entidades.Motorista;
 
 import java.util.Scanner;
 
@@ -112,6 +113,16 @@ public class Main {
     }
 
     private static void cadastrarMotorista() {
+        SC.nextLine();
+        System.out.println("Insira o Nome do seu Motorista: ");
+        String nome = SC.nextLine();
+        System.out.println("Insira a CNH do seu Motorista: ");
+        String cnh = SC.nextLine();
+        System.out.println("Insira o Veiculo de seu Motorista: ");
+        String veiculo = SC.nextLine();
+        System.out.println("Insira a Cidade Base de seu Motorista: ");
+        String cidadeBase = SC.nextLine();
+        MOTORISTA_DAO.inserirMotorista(new Motorista(nome,cnh,veiculo,cidadeBase));
     }
 
     private static void criarPedido() {
