@@ -4,6 +4,7 @@ import Dao.*;
 import Entidades.Cliente;
 import Entidades.Motorista;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -126,6 +127,14 @@ public class Main {
     }
 
     private static void criarPedido() {
+        ArrayList<Cliente> listaCliente = CLIENTE_DAO.mostrarTodosClientes();
+        System.out.println("Lista Clientes: ");
+        for(Cliente cliente : listaCliente){
+            System.out.println(cliente);
+        }
+        System.out.println("Insira o ID do Cliente");
+        System.out.println("Lista de Motorista: ");
+
     }
 
     private static void atribuirPedidoAMotorista() {

@@ -5,7 +5,9 @@ import Entidades.Cliente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ClienteDao {
     public void inserirCliente(Cliente cliente){
@@ -27,5 +29,24 @@ public class ClienteDao {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+    public ArrayList<Cliente> mostrarTodosClientes(){
+        String sql = """
+                SELECT id, nome, cpf_cnpj, endereco, cidade, estado
+                FROM cliente
+                """;
+        try (Connection conn = Conexao.Conectar()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Cliente> listaClientes = new ArrayList<>();
+            while(rs.next()){
+                listaClientes.add(new Cliente(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf_cnpj"),
+                        rs.getString("endereco"), rs.getString("cidade"), rs.getString("estado")));
+            }
+            return listaClientes;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
