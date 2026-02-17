@@ -133,7 +133,12 @@ public class Main {
             System.out.println(cliente);
         }
         System.out.println("Insira o ID do Cliente");
+        int idCliente = SC.nextInt();
+        ArrayList<Motorista> listaMotorista = MOTORISTA_DAO.mostrarTodosMotoristas();
         System.out.println("Lista de Motorista: ");
+        for(Motorista motorista : listaMotorista){
+            System.out.println(motorista);
+        }
 
     }
 
