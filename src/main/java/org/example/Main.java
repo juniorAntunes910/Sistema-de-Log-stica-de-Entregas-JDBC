@@ -3,8 +3,11 @@ package org.example;
 import Dao.*;
 import Entidades.Cliente;
 import Entidades.Motorista;
+import Entidades.Pedido;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -132,17 +135,36 @@ public class Main {
         for(Cliente cliente : listaCliente){
             System.out.println(cliente);
         }
-        System.out.println("Insira o ID do Cliente");
+        System.out.println("Insira o ID do Cliente: ");
         int idCliente = SC.nextInt();
+        System.out.println("A data do pedido é a atual!");
+        LocalDate dataAtual = LocalDate.now();
+        System.out.println(dataAtual);
+        System.out.println("Insira o volume da carga: ");
+        double volume = SC.nextDouble();
+        System.out.println("Insira o peso da carga: ");
+        double peso = SC.nextDouble();
+        System.out.println("Qual o status do pedido: *Digite tudo maiusculo, vai virar enum alguma hora mas nao hj");
+        SC.nextLine();
+        String status = SC.nextLine();
+        PEDIDO_DAO.inserirPedido(new Pedido(idCliente, dataAtual, volume, peso, status));
+    }
+    private static void atribuirPedidoAMotorista() {
         ArrayList<Motorista> listaMotorista = MOTORISTA_DAO.mostrarTodosMotoristas();
-        System.out.println("Lista de Motorista: ");
+        System.out.println("Lista Motorista: ");
         for(Motorista motorista : listaMotorista){
             System.out.println(motorista);
         }
-
-    }
-
-    private static void atribuirPedidoAMotorista() {
+        System.out.println("Insira o ID do Motorista: ");
+        int idMotorista = SC.nextInt();
+        ArrayList<Pedido> listaPedidos = PEDIDO_DAO.mostrarTodosPedidos();
+        System.out.println("Lista Pedidos: ");
+        for(Pedido pedido : listaPedidos){
+            System.out.println(pedido);
+        }
+        System.out.println("Insira o ID do Pedido: ");
+        int idPedido = SC.nextInt();
+        System.out.println("Insira a data de Saida: ");
     }
 
     private static void registrarEventoEntrega() {

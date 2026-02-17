@@ -1,14 +1,16 @@
 package Entidades;
 
+import java.time.LocalDate;
+
 public class Pedido {
     private int id;
     private int cliente_id;
-    private String data_pedido;
+    private LocalDate data_pedido;
     private double volumeM3;
     private double pesoKg;
     private String status;
 
-    public Pedido(int id, int cliente_id, String data_pedido, double volumeM3, double pesoKg, String status) {
+    public Pedido(int id, int cliente_id, LocalDate data_pedido, double volumeM3, double pesoKg, String status) {
         this.id = id;
         this.cliente_id = cliente_id;
         this.data_pedido = data_pedido;
@@ -17,7 +19,7 @@ public class Pedido {
         this.status = status;
     }
 
-    public Pedido(int cliente_id, String data_pedido, double volumeM3, double pesoKg, String status) {
+    public Pedido(int cliente_id, LocalDate data_pedido, double volumeM3, double pesoKg, String status) {
         this.cliente_id = cliente_id;
         this.data_pedido = data_pedido;
         this.volumeM3 = volumeM3;
@@ -41,11 +43,11 @@ public class Pedido {
         this.cliente_id = cliente_id;
     }
 
-    public String getData_pedido() {
+    public LocalDate getData_pedido() {
         return data_pedido;
     }
 
-    public void setData_pedido(String data_pedido) {
+    public void setData_pedido(LocalDate data_pedido) {
         this.data_pedido = data_pedido;
     }
 
