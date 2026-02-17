@@ -6,6 +6,7 @@ import Entidades.Motorista;
 import Entidades.Pedido;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -164,7 +165,12 @@ public class Main {
         }
         System.out.println("Insira o ID do Pedido: ");
         int idPedido = SC.nextInt();
-        System.out.println("Insira a data de Saida: ");
+        System.out.println("Insira a data de Saida (dd/mm/yyyy): ");
+        SC.nextLine();
+        String dataSaidaTexto = SC.nextLine();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dataSaidaTexto);
+        LocalDate dataSaida = LocalDate.parse(dataSaidaTexto, formatter);
+        System.out.println("Data convertida : " + dataSaida);
     }
 
     private static void registrarEventoEntrega() {
