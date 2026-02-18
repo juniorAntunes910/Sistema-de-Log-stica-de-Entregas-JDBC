@@ -196,10 +196,32 @@ public class Main {
     }
 
     private static void atualizarStatusEntrega() {
+        System.out.println("Lista de Entregas: ");
+        ArrayList<Entrega> listaEntregas = ENTREGA_DAO.mostrarTodasEntregas();
+        for(Entrega entrega : listaEntregas){
+            System.out.println(entrega);
+        }
+        System.out.println("Insira o id da entrega: ");
+        int id = SC.nextInt();
+        System.out.println("Insira o novo Status: ");
+        SC.nextLine();
+        String status = SC.nextLine();
+         ENTREGA_DAO.atualizarStatusEntrega(status, id);
     }
 
-    private static void listarTodasEntregasClientesMotoristas() {
-    }
+        private static void listarTodasEntregasClientesMotoristas() {
+            System.out.println("\n=== RELATÓRIO GERAL DE ENTREGAS ===");
+            ArrayList<EntregaClienteMotorista> lista = ENTREGA_DAO.listarTodasEntregasClienteMotorista();
+
+            if (lista.isEmpty()) {
+                System.out.println("Nenhuma entrega registrada com motorista e cliente.");
+            } else {
+                for (EntregaClienteMotorista item : lista) {
+                    System.out.println(item);
+                }
+            }
+            System.out.println("====================================\n");
+        }
 
     private static void relatorioTotalEntregasPorMotorista() {
     }
