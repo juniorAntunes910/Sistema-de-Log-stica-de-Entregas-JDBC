@@ -220,13 +220,17 @@ public class Main {
                     System.out.println(item);
                 }
             }
-            System.out.println("====================================\n");
         }
 
     private static void relatorioTotalEntregasPorMotorista() {
+        ArrayList<MotoristaTotalEntregas> listaMotora = MOTORISTA_DAO.contagemMotorista();
+        for(MotoristaTotalEntregas motoristaTotalEntregas : listaMotora){
+            System.out.println(motoristaTotalEntregas);
+        }
     }
 
     private static void relatorioClientesMaiorVolumeEntregue() {
+
     }
 
     private static void relatoriosPedidosPendentesPorEstado() {
