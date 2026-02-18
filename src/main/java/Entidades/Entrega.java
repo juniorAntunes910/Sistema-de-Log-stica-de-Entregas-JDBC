@@ -1,14 +1,16 @@
 package Entidades;
 
+import java.time.LocalDate;
+
 public class Entrega {
     private int id;
     private int pedidoId;
     private int motoristaId;
-    private String dataSaida;
-    private String dataEntrega;
+    private LocalDate dataSaida;
+    private LocalDate dataEntrega;
     private String status;
 
-    public Entrega(int id, int pedidoId, int motoristaId, String dataSaida, String dataEntrega, String status) {
+    public Entrega(int id, int pedidoId, int motoristaId, LocalDate dataSaida, LocalDate dataEntrega, String status) {
         this.id = id;
         this.pedidoId = pedidoId;
         this.motoristaId = motoristaId;
@@ -17,7 +19,7 @@ public class Entrega {
         this.status = status;
     }
 
-    public Entrega(int pedidoId, int motoristaId, String dataSaida, String dataEntrega, String status) {
+    public Entrega(int pedidoId, int motoristaId, LocalDate dataSaida, LocalDate dataEntrega, String status) {
         this.pedidoId = pedidoId;
         this.motoristaId = motoristaId;
         this.dataSaida = dataSaida;
@@ -49,19 +51,19 @@ public class Entrega {
         this.motoristaId = motoristaId;
     }
 
-    public String getDataSaida() {
+    public LocalDate getDataSaida() {
         return dataSaida;
     }
 
-    public void setDataSaida(String dataSaida) {
+    public void setDataSaida(LocalDate dataSaida) {
         this.dataSaida = dataSaida;
     }
 
-    public String getDataEntrega() {
+    public LocalDate getDataEntrega() {
         return dataEntrega;
     }
 
-    public void setDataEntrega(String dataEntrega) {
+    public void setDataEntrega(LocalDate dataEntrega) {
         this.dataEntrega = dataEntrega;
     }
 

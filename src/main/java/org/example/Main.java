@@ -1,9 +1,7 @@
 package org.example;
 
 import Dao.*;
-import Entidades.Cliente;
-import Entidades.Motorista;
-import Entidades.Pedido;
+import Entidades.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -165,15 +163,36 @@ public class Main {
         }
         System.out.println("Insira o ID do Pedido: ");
         int idPedido = SC.nextInt();
-        System.out.println("Insira a data de Saida (dd/mm/yyyy): ");
+        System.out.println("Insira a data de Saida (dd/MM/yyyy): ");
         SC.nextLine();
         String dataSaidaTexto = SC.nextLine();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dataSaidaTexto);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataSaida = LocalDate.parse(dataSaidaTexto, formatter);
         System.out.println("Data convertida : " + dataSaida);
+        System.out.println("Insira a data de Saida (dd/MM/yyyy): ");
+        String dataEntradaTexto = SC.nextLine();
+        LocalDate dataEntrada = LocalDate.parse(dataEntradaTexto, formatter);
+        System.out.println("Data convertida : " + dataEntrada);
+        System.out.println("Insira o Status da entrega - Vai virar enum alguma hora tbm");
+        String status = SC.nextLine();
+        ENTREGA_DAO.inserirEntrega(new Entrega(idPedido, idMotorista, dataSaida, dataEntrada, status));
     }
-
     private static void registrarEventoEntrega() {
+        System.out.println("lista de Entregas");
+        ArrayList<Entrega> listaEntrega = ENTREGA_DAO.mostrarTodasEntregas();
+        for(Entrega entrega : listaEntrega){
+            System.out.println(entrega);
+        }
+        System.out.println("Insira o ID da entrega");
+        int idEntrega = SC.nextInt();
+        System.out.println("Insira a data da Entrega (dd/MM/yyyy): ");
+        SC.nextLine();
+        String dataEventoTexto = SC.nextLine();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataEvento = LocalDate.parse(dataEventoTexto, formatter);
+        System.out.println("Insira a descrição do evento: ");
+        String descricao = SC.nextLine();
+        HISTORICO_ENTREGA_DAO.inserirHistoricoEntrega(new HistoricoEntrega(idEntrega, dataEvento, descricao));
     }
 
     private static void atualizarStatusEntrega() {

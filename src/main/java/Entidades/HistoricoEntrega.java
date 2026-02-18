@@ -1,19 +1,21 @@
 package Entidades;
 
+import java.time.LocalDate;
+
 public class HistoricoEntrega {
     private int id;
     private int entrega_id;
-    private String dataEvento;
+    private LocalDate dataEvento;
     private String descricao;
 
-    public HistoricoEntrega(int id, int entrega_id, String dataEvento, String descricao) {
+    public HistoricoEntrega(int id, int entrega_id, LocalDate dataEvento, String descricao) {
         this.id = id;
         this.entrega_id = entrega_id;
         this.dataEvento = dataEvento;
         this.descricao = descricao;
     }
 
-    public HistoricoEntrega(int entrega_id, String dataEvento, String descricao) {
+    public HistoricoEntrega(int entrega_id, LocalDate dataEvento, String descricao) {
         this.entrega_id = entrega_id;
         this.dataEvento = dataEvento;
         this.descricao = descricao;
@@ -35,11 +37,11 @@ public class HistoricoEntrega {
         this.entrega_id = entrega_id;
     }
 
-    public String getDataEvento() {
+    public LocalDate getDataEvento() {
         return dataEvento;
     }
 
-    public void setDataEvento(String dataEvento) {
+    public void setDataEvento(LocalDate dataEvento) {
         this.dataEvento = dataEvento;
     }
 
