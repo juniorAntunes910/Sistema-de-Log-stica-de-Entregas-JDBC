@@ -271,6 +271,19 @@ public class Main {
     }
 
     private static void excluirEntrega() {
+        ArrayList<Entrega> listaEntrega = ENTREGA_DAO.mostrarTodasEntregas();
+        for(Entrega entrega : listaEntrega){
+            System.out.println(entrega);
+        }
+        System.out.println("Insira o ID da entrega que você deseja excluir: ");
+        int id = SC.nextInt();
+        System.out.println("Digite - 'EXCLUSAO' para excluir a entrega: ");
+        SC.nextLine();
+        String exclud = SC.nextLine();
+        if(!exclud.equals("EXCLUSAO")){
+            return;
+        }
+        ENTREGA_DAO.deletarEntrega(id);
     }
 
     private static void excluirCliente() {

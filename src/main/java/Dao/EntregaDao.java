@@ -128,4 +128,19 @@ public class EntregaDao {
         }
         return null;
     }
+
+    public void deletarEntrega(int id){
+        String sql = """
+                DELETE FROM entrega 
+                WHERE id = ?
+                """;
+        try (Connection conn = Conexao.Conectar()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            System.out.println("Deletado com sucesso!");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

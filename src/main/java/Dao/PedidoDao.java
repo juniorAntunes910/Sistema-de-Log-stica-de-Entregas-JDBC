@@ -105,18 +105,18 @@ public class PedidoDao {
         return null;
     }
 
-    public void cancelarPedido(int id){
+    public void cancelarPedido(int id) {
         String sql = """
                 UPDATE pedido
                 SET status = "CANCELADO"
                 WHERE id = ?
                 """;
-        try (Connection conn = Conexao.Conectar()){
+        try (Connection conn = Conexao.Conectar()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.executeUpdate();
             System.out.println("Cancelado com sucesso");
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
