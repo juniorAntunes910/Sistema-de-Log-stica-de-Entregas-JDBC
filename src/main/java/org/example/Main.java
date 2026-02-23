@@ -251,6 +251,13 @@ public class Main {
     }
 
     private static void buscarPedidoPorCPFCNPJCliente() {
+        System.out.println("Insira o CPF/CNPJ do cliente: ");
+        SC.nextLine();
+        String cnpjCPF = SC.nextLine();
+        ArrayList<Pedido> listaPedidos = PEDIDO_DAO.buscarPorCpfCnpj(cnpjCPF);
+        for(Pedido pedido : listaPedidos){
+            System.out.println(pedido);
+        }
     }
 
     private static void cancelarPedido() {

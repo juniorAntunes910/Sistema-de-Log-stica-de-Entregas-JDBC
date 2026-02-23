@@ -76,4 +76,33 @@ public class PedidoDao {
         return null;
     }
 
+    public ArrayList<Pedido> buscarPorCpfCnpj(String cpf_cnpj){
+        String sql = """
+                SELECT
+                	p.id,
+                	p.cliente_id,
+                	p.data_pedido,
+                    p.volume_m3,
+                    p.peso_kg,
+                    p.status
+                    FROM pedido p
+                    JOIN cliente c ON p.cliente_id = c.id
+                    WHERE c.cpf_cnpj = ?;
+                """;
+        try (Connection conn = Conexao.Conectar()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, cpf_cnpj);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Pedido> listaPedido = new ArrayList<>();
+            while (rs.next()){
+                listaPedido.add(new Pedido(rs.getInt("id"), rs.getInt("cliente_id"), rs.getDate("data_pedido").toLocalDate(),
+                        rs.getDouble("volume_m3"), rs.getDouble("peso_kg"), rs.getString("status")));
+            }
+            return listaPedido;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
