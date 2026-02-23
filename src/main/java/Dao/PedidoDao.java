@@ -1,6 +1,7 @@
 package Dao;
 
 import Conexao.Conexao;
+import Entidades.ClienteMaiorVolume;
 import Entidades.Pedido;
 
 import java.sql.Connection;
@@ -48,4 +49,5 @@ public class PedidoDao {
         }
         return null;
     }
+
 }

@@ -230,7 +230,10 @@ public class Main {
     }
 
     private static void relatorioClientesMaiorVolumeEntregue() {
-
+        ArrayList<ClienteMaiorVolume> listaCliente = CLIENTE_DAO.listarTodosClientesMaiorEntrega();
+        for(ClienteMaiorVolume cliente : listaCliente){
+            System.out.println(cliente);
+        }
     }
 
     private static void relatoriosPedidosPendentesPorEstado() {

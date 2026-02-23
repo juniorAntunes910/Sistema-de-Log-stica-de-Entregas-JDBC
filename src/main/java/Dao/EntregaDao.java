@@ -1,6 +1,7 @@
 package Dao;
 
 import Conexao.Conexao;
+import Entidades.ClienteMaiorVolume;
 import Entidades.Entrega;
 import Entidades.EntregaClienteMotorista;
 
@@ -99,4 +100,5 @@ public class EntregaDao {
         }
         return lista;
     }
+
 }

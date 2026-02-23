@@ -2,6 +2,7 @@ package Dao;
 
 import Conexao.Conexao;
 import Entidades.Cliente;
+import Entidades.ClienteMaiorVolume;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,4 +50,31 @@ public class ClienteDao {
         }
         return null;
     }
+
+    public ArrayList<ClienteMaiorVolume> listarTodosClientesMaiorEntrega(){
+        String sql = """
+                SELECT
+                c.id,
+                c.nome,
+                SUM(p.volume_m3) AS total_volume
+                FROM cliente c
+                JOIN pedido p ON p.cliente_id = c.id
+                WHERE p.status = "ENTREGUE"
+                GROUP BY c.id, c.nome
+                ORDER BY total_volume DESC;
+                """;
+        try(Connection conn = Conexao.Conectar()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<ClienteMaiorVolume> listaClienteM = new ArrayList<>();
+            while(rs.next()){
+                listaClienteM.add(new ClienteMaiorVolume(rs.getInt("id"), rs.getString("nome"), rs.getDouble("total_volume")));
+            }
+            return listaClienteM;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
