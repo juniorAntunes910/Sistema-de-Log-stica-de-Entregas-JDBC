@@ -3,6 +3,7 @@ package Dao;
 import Conexao.Conexao;
 import Entidades.ClienteMaiorVolume;
 import Entidades.Pedido;
+import Entidades.QuantidadeEstado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,6 +46,31 @@ public class PedidoDao {
             }
             return listaPedidos;
         }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<QuantidadeEstado> mostrarEstadoPedidosPendente(){
+        String sql = """
+                SELECT\s
+                	c.estado,
+                    COUNT(p.id) AS quantidade_estado
+                    FROM pedido p\s
+                    JOIN cliente c ON p.cliente_id = c.id
+                    WHERE p.status = 'PENDENTE'
+                    GROUP BY c.estado
+                    ORDER BY quantidade_estado DESC;
+                """;
+        try(Connection conn = Conexao.Conectar()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<QuantidadeEstado> listaQuantidade = new ArrayList<>();
+            while (rs.next()){
+                listaQuantidade.add(new QuantidadeEstado(rs.getString("estado"), rs.getInt("quantidade_estado")));
+            }
+            return listaQuantidade;
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

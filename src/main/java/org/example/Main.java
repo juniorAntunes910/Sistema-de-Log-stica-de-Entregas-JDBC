@@ -237,9 +237,17 @@ public class Main {
     }
 
     private static void relatoriosPedidosPendentesPorEstado() {
+        ArrayList<QuantidadeEstado> listaQuantidade = PEDIDO_DAO.mostrarEstadoPedidosPendente();
+        for (QuantidadeEstado qtd : listaQuantidade){
+            System.out.println(qtd);
+        }
     }
 
     private static void relatorioEntregasAtrasadasPorCidade() {
+        ArrayList<CidadeAtrasada> listaCidadeAtrasa = ENTREGA_DAO.listarCidadesAtrasadas();
+        for(CidadeAtrasada cidade : listaCidadeAtrasa){
+            System.out.println(listaCidadeAtrasa);
+        }
     }
 
     private static void buscarPedidoPorCPFCNPJCliente() {

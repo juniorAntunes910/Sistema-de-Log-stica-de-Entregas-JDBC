@@ -1,6 +1,7 @@
 package Dao;
 
 import Conexao.Conexao;
+import Entidades.CidadeAtrasada;
 import Entidades.ClienteMaiorVolume;
 import Entidades.Entrega;
 import Entidades.EntregaClienteMotorista;
@@ -101,4 +102,30 @@ public class EntregaDao {
         return lista;
     }
 
+    public ArrayList<CidadeAtrasada> listarCidadesAtrasadas(){
+        String sql = """
+                SELECT
+                	c.cidade,
+                    COUNT(e.id) AS quantidade_atrasadas
+                    from entrega e
+                    JOIN pedido p ON e.pedido_id = p.id
+                    JOIN cliente c ON p.cliente_id = c.id
+                    WHERE
+                		e.status = 'ATRASADA'
+                        GROUP BY c.cidade
+                        ORDER BY quantidade_atrasadas DESC;
+                """;
+        try(Connection conn = Conexao.Conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<CidadeAtrasada> listaCidade = new ArrayList<>();
+            while (rs.next()){
+                listaCidade.add(new CidadeAtrasada(rs.getString("cidade"), rs.getInt("quantidade_atrasadas")));
+            }
+            return listaCidade;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
