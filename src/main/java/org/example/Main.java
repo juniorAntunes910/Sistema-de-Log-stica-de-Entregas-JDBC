@@ -99,7 +99,7 @@ public class Main {
             }
         }
     }
-
+ //1
     private static void cadastrarCliente() {
         SC.nextLine();
         System.out.println("Insira o nome do Cliente: ");
@@ -114,7 +114,7 @@ public class Main {
         String estado = SC.nextLine();
         CLIENTE_DAO.inserirCliente(new Cliente(nome,cpfCnpj,endereco,cidade,estado));
     }
-
+//2
     private static void cadastrarMotorista() {
         SC.nextLine();
         System.out.println("Insira o Nome do seu Motorista: ");
@@ -127,7 +127,7 @@ public class Main {
         String cidadeBase = SC.nextLine();
         MOTORISTA_DAO.inserirMotorista(new Motorista(nome,cnh,veiculo,cidadeBase));
     }
-
+//3
     private static void criarPedido() {
         ArrayList<Cliente> listaCliente = CLIENTE_DAO.mostrarTodosClientes();
         System.out.println("Lista Clientes: ");
@@ -148,6 +148,7 @@ public class Main {
         String status = SC.nextLine();
         PEDIDO_DAO.inserirPedido(new Pedido(idCliente, dataAtual, volume, peso, status));
     }
+    //4
     private static void atribuirPedidoAMotorista() {
         ArrayList<Motorista> listaMotorista = MOTORISTA_DAO.mostrarTodosMotoristas();
         System.out.println("Lista Motorista: ");
@@ -177,6 +178,7 @@ public class Main {
         String status = SC.nextLine();
         ENTREGA_DAO.inserirEntrega(new Entrega(idPedido, idMotorista, dataSaida, dataEntrada, status));
     }
+    //5
     private static void registrarEventoEntrega() {
         System.out.println("lista de Entregas");
         ArrayList<Entrega> listaEntrega = ENTREGA_DAO.mostrarTodasEntregas();
@@ -194,7 +196,7 @@ public class Main {
         String descricao = SC.nextLine();
         HISTORICO_ENTREGA_DAO.inserirHistoricoEntrega(new HistoricoEntrega(idEntrega, dataEvento, descricao));
     }
-
+//6
     private static void atualizarStatusEntrega() {
         System.out.println("Lista de Entregas: ");
         ArrayList<Entrega> listaEntregas = ENTREGA_DAO.mostrarTodasEntregas();
@@ -208,7 +210,7 @@ public class Main {
         String status = SC.nextLine();
          ENTREGA_DAO.atualizarStatusEntrega(status, id);
     }
-
+//7
         private static void listarTodasEntregasClientesMotoristas() {
             System.out.println("\n=== RELATÓRIO GERAL DE ENTREGAS ===");
             ArrayList<EntregaClienteMotorista> lista = ENTREGA_DAO.listarTodasEntregasClienteMotorista();
@@ -221,35 +223,35 @@ public class Main {
                 }
             }
         }
-
+//8
     private static void relatorioTotalEntregasPorMotorista() {
         ArrayList<MotoristaTotalEntregas> listaMotora = MOTORISTA_DAO.contagemMotorista();
         for(MotoristaTotalEntregas motoristaTotalEntregas : listaMotora){
             System.out.println(motoristaTotalEntregas);
         }
     }
-
+//9
     private static void relatorioClientesMaiorVolumeEntregue() {
         ArrayList<ClienteMaiorVolume> listaCliente = CLIENTE_DAO.listarTodosClientesMaiorEntrega();
         for(ClienteMaiorVolume cliente : listaCliente){
             System.out.println(cliente);
         }
     }
-
+//10
     private static void relatoriosPedidosPendentesPorEstado() {
         ArrayList<QuantidadeEstado> listaQuantidade = PEDIDO_DAO.mostrarEstadoPedidosPendente();
         for (QuantidadeEstado qtd : listaQuantidade){
             System.out.println(qtd);
         }
     }
-
+//11
     private static void relatorioEntregasAtrasadasPorCidade() {
         ArrayList<CidadeAtrasada> listaCidadeAtrasa = ENTREGA_DAO.listarCidadesAtrasadas();
         for(CidadeAtrasada cidade : listaCidadeAtrasa){
             System.out.println(listaCidadeAtrasa);
         }
     }
-
+//12
     private static void buscarPedidoPorCPFCNPJCliente() {
         System.out.println("Insira o CPF/CNPJ do cliente: ");
         SC.nextLine();
@@ -259,7 +261,7 @@ public class Main {
             System.out.println(pedido);
         }
     }
-
+//13
     private static void cancelarPedido() {
         ArrayList<Pedido> listaPedido = PEDIDO_DAO.mostrarTodosPedidos();
         for(Pedido pedido : listaPedido){
@@ -269,7 +271,7 @@ public class Main {
         int id = SC.nextInt();
         PEDIDO_DAO.cancelarPedido(id);
     }
-
+//14
     private static void excluirEntrega() {
         ArrayList<Entrega> listaEntrega = ENTREGA_DAO.mostrarTodasEntregas();
         for(Entrega entrega : listaEntrega){
@@ -285,10 +287,11 @@ public class Main {
         }
         ENTREGA_DAO.deletarEntrega(id);
     }
-
+//15
     private static void excluirCliente() {
-    }
 
+    }
+//16
     private static void excluirMotorista() {
     }
 }
