@@ -261,6 +261,13 @@ public class Main {
     }
 
     private static void cancelarPedido() {
+        ArrayList<Pedido> listaPedido = PEDIDO_DAO.mostrarTodosPedidos();
+        for(Pedido pedido : listaPedido){
+            System.out.println(pedido);
+        }
+        System.out.println("Insira o ID do Pedido que você deseja cancelar: ");
+        int id = SC.nextInt();
+        PEDIDO_DAO.cancelarPedido(id);
     }
 
     private static void excluirEntrega() {
