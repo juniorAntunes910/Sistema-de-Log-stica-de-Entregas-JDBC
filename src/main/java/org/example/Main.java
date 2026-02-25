@@ -289,7 +289,12 @@ public class Main {
     }
 //15
     private static void excluirCliente() {
-
+        ArrayList<Cliente> listaCliente = CLIENTE_DAO.mostrarTodosClientes();
+        for(Cliente cliente : listaCliente){
+            System.out.println(cliente);
+        }
+        System.out.println("Insira o ID do cliente que você deseja deletar - Com verificação de Dependencia :");
+        int id = SC.nextInt();
     }
 //16
     private static void excluirMotorista() {

@@ -77,4 +77,42 @@ public class ClienteDao {
         return null;
     }
 
+    public boolean podeExcluirCliente(int id){
+        String sql = """
+                SELECT COUNT(*) AS total FROM pedido WHERE cliente_id = ?
+                """;
+        try (Connection conn = Conexao.Conectar()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                return rs.getInt("total") == 0;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void excluirCliente(int clienteId) {
+        if (!podeExcluirCliente(clienteId)) {
+            System.out.println("Não é possível excluir: Cliente tem pedidos cadastrados!");
+            return;
+        }
+
+        String sql = "DELETE FROM cliente WHERE id = ?";
+        try (Connection conn = Conexao.Conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, clienteId);
+            int linhasAfetadas = stmt.executeUpdate();
+            if (linhasAfetadas > 0) {
+                System.out.println("Cliente excluído com sucesso!");
+            } else {
+                System.out.println("Cliente não encontrado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
