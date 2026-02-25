@@ -69,4 +69,35 @@ public class MotoristaDao {
         }
         return null;
     }
+
+    public boolean podeExcluirMotorista(int motoristaId) {
+        String sql = "SELECT COUNT(*) AS total FROM entrega WHERE motorista_id = ?";
+        try (Connection conn = Conexao.Conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, motoristaId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total") == 0; // true se não tiver entregas
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public void excluirMotorista(int motoristaId) {
+        if (!podeExcluirMotorista(motoristaId)) {
+            System.out.println("Não é possível excluir: Motorista possui entregas atribuídas!");
+            return;
+        }
+
+        String sql = "DELETE FROM motorista WHERE id = ?";
+        try (Connection conn = Conexao.Conectar()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, motoristaId);
+            stmt.executeUpdate();
+            System.out.println("Motorista excluido com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

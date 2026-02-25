@@ -295,8 +295,26 @@ public class Main {
         }
         System.out.println("Insira o ID do cliente que você deseja deletar - Com verificação de Dependencia :");
         int id = SC.nextInt();
+        if(CLIENTE_DAO.podeExcluirCliente(id)){
+            CLIENTE_DAO.excluirCliente(id);
+        }else{
+            System.out.println("Cliente possui dependencia!");
+            return;
+        }
     }
 //16
     private static void excluirMotorista() {
+        ArrayList<Motorista> listaMotorista = MOTORISTA_DAO.mostrarTodosMotoristas();
+        for(Motorista motorista : listaMotorista){
+            System.out.println(motorista);
+        }
+        System.out.println("Insira o ID do motorista que você deseja excluir: ");
+        int id = SC.nextInt();
+        if(MOTORISTA_DAO.podeExcluirMotorista(id)){
+            MOTORISTA_DAO.excluirMotorista(id);
+        }else{
+            System.out.println("Motorista possui dependencia");
+            return;
+        }
     }
 }
